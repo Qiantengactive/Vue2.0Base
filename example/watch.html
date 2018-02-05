@@ -1,0 +1,85 @@
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>watch Option属性 传值</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>watch Option属性 传值</h1>
+    <hr>
+    <div id="app">
+        <p>今日温度： {{wendu}}度</p>
+        <p>穿衣建议： {{chuangyi}}</p>
+        <p>
+            <button @click="raise">升高温度</button>
+            <button @click="reduce">减少温度</button>
+        </p>
+    </div>
+    <button onclick="touch()">app外变化</button>
+    <script type="text/javascript">
+        function touch(){
+            app.wendu++;
+        }
+        var chuanyiArray = ['T恤短袖', '长裙', '羽绒服']
+        var app = new Vue({
+            el: '#app',
+            data: {
+                wendu: 12,
+                chuangyi: '夹克长裙'
+            },
+            methods: {
+                raise: function () {
+                    this.wendu += 5;
+                },
+                reduce: function () {
+                    this.wendu -= 5;
+                }
+            }
+            /* 
+            1、监听数据变化有两种，深度和浅度，形式如下：
+        　　　　vm.$watch(name,fnCb); //浅度
+　　　　        vm.$watch(name,fnCb,{deep:true}); //深度监视
+                一、写在里面
+             */
+            // ,
+            /* watch 1.监控值  2.*/
+            // watch: {
+            //     wendu: function (newValue, oldValue) {
+            //         console.log(newValue);
+            //         console.log(oldValue);
+            //         if (newValue >= 26) {
+            //             this.chuangyi = chuanyiArray[0];
+            //         } else if (newValue < 26 && newValue > 0) {
+            //             this.chuangyi = chuanyiArray[1];
+            //         } else {
+            //             this.chuangyi = chuanyiArray[2];
+            //         }
+            //     }
+            // }
+        });
+        /* 
+        二、用实例属性写watch监控
+            有些时候我们会用实例属性的形式来写watch监控。也就是把我
+            们watch写在构造器的外部，这样的好处就是降低我们程序的耦合度，使程序变的灵活。
+         */
+        app.$watch('wendu', function (newValue, oldValue) {
+            if (newValue >= 26) {
+                this.chuangyi = chuanyiArray[0];
+                alert("短袖")
+            } else if (newValue < 26 && newValue > 0) {
+                this.chuangyi = chuanyiArray[1];
+                alert("长裙")
+            } else {
+                this.chuangyi = chuanyiArray[2];
+                alert("羽绒服")
+            }
+        })
+    </script>
+</body>
+
+</html>

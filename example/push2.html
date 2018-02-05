@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>push方法删除加入</h1>
+    <hr>
+    <div id="app">
+        <li v-for="(item,key) in comments">
+            {{item.id}}--{{item.comment}}
+            <button @click="remove(key)">Delete</button>
+        </li>
+        <textarea name="" id="" cols="30" rows="10" v-model="current_Content"></textarea>
+        <br>
+        <button @click="push('end')">后加</button>
+        <button @click="push('pre')">前加</button>
+        <button @click="del('last')">删除最后一条评论</button>
+        <button @click="del('first')">删除第一条评论</button>
+        <button @click="sort()">按照编号排序</button>
+        <button @click="reverse()">反转排序</button>
+        <br>
+        <input type="text" v-on:keyup.enter="search" v-model="serach_content">
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                serach_content:'',
+                current_Content: '',
+                comments: [
+                    { id: 3, comment: 'awqdq' },
+                    { id: 2, comment: 'eqweqweff' },
+                    { id: 4, comment: 'hhhresdfzx' },
+                    { id: 1, comment: 'dsdsjf' }
+                ]
+            },
+            methods: {
+                search(){
+                    this.comments=this.comments.filter(o=>{
+                        var reg = new RegExp(this.serach_content,'i')
+                        return reg.test(o.comment)
+                    });
+                },
+                remove(key) {
+                    this.comments.splice(key, 1);
+                },
+                push(type) {
+                    var id=this.comments.length+1;
+                    var content = {id:id, comment: this.current_Content }
+                    console.log(type);
+                    switch (type) {
+                        case 'end':
+                            this.comments.push(content);
+                            break;
+                        case 'pre':
+                            this.comments.unshift(content);
+                            break;
+                    }
+                    this.current_content = '';
+                },
+                del(type) {
+                    switch (type) {
+                        case 'first':
+                            this.comments.shift();
+                            break;
+                        case 'last':
+                            this.comments.pop();
+                            break;
+                    }
+                },
+                sort() {
+                    this.comments.sort(function (a, b) {
+                        return a.id > b.id;
+                    });
+                },
+                reverse(){
+                    this.comments.reverse();
+                }
+
+            }
+        });
+
+    </script>
+</body>
+
+</html>

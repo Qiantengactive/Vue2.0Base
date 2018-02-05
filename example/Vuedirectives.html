@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="hdcms">
+        <!-- <span v-start.abc>后盾人</span> -->
+        <span v-star="color">标题</span>
+        <input type="text" v-model="color" v-focus>
+        <h1 v-hide="false">hdhd</h1>
+    </div>
+</body>
+<script>
+    // Vue.directive('start',{
+    //     bind(el,bind){
+    //         console.log(bind);
+    //     }
+    // })
+    // Vue.directive('hd',{
+    //     bind(el,bind){
+    //         console.log(bind);
+    //     }
+    // })
+    new Vue({
+        el: '#hdcms',
+        data: {
+            title: 'www.baidu.com',
+            color: 'red'
+        },
+        directives: {
+            star(el, bind) {
+                var color = bind.value ? bind.value : 'red';
+                el.style.cssText = "color:" + color;
+            },
+            //bin update 两种写法
+            focus: {
+                inserted(el, bind) {
+                    el.focus();
+                }
+            },
+            hide(el, bind) {
+                console.log(bind);
+                if (bind.value) {
+                    el.style.cssText = 'display:none'
+                }
+            }
+        }
+    })
+
+</script>
+
+</html>

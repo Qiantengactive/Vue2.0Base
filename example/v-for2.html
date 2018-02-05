@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for遍历对象</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>v-for遍历对象</h1>
+    <div id="app">
+        <ul>
+            <li v-for="(item,key,index) in user">
+              {{index}}---{{key}}---{{item}}
+            </li>
+        </ul>
+        <table border="1" width="100%">
+            <tr v-for="v in 5">
+                <td>v</td>
+            </tr>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                students: [
+                    { name: 'jsp4', age: 45 },
+                    { name: 'jsp2', age: 23 },
+                    { name: 'jsp3', age: 34 },
+                    { name: 'jsp1', age: 11 }
+                ],
+                user: {
+                    name: "小二郎",
+                    age: '22',
+                    sex: 'male'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <hd-new :list="goods" @sum="total"></hd-new>
+        总计:{{totalPrice}}
+    </div>
+</body>
+<script type="text/x-template" id="hdNews">
+        <table border="1" width="90%">
+            <tr>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>商品数量</th>
+            </tr>
+            <tr v-for="v in list">
+                <td>{{v.title}}</td>
+                <td>{{v.price}}</td>
+                <td>
+                    <input type="text" v-model="v.num" @blur="sum">
+                </td>
+            </tr>
+        </table>
+</script>
+<script>
+    var hdNew = {
+        template: '#hdNews',
+        props: ['list'],
+        methods: {
+            sum() {
+                //呼叫sum方法  emit调用sum自定义方法 之后
+                this.$emit('sum');
+            }
+        }
+    };
+    new Vue({
+        el: '#app',
+        components: { hdNew },
+        methods: {
+            total() {
+                this.totalPrice = 0;
+                this.goods.forEach((obj) => {
+                    this.totalPrice += obj.num * obj.price;
+                })
+            }
+        },
+        mounted() {
+            this.total();
+        },
+        data: {
+            totalPrice: 0,
+            goods: [
+                { title: 'iphone7Plus', price: 100, num: 1 },
+                { title: '后盾人会员', price: 200, num: 1 },
+            ]
+        }
+    })
+</script>
+
+</html>

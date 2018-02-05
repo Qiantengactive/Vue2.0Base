@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>三元运算符的D v-on & v-bind & v-if</title>
+    <script src="../assets/js/vue.js"></script>
+    <style>
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <h1>三元运算符的D v-on & v-bind & v-if</h1>
+    <hr>
+    <div id="app">
+        <li v-for="item in items">
+            <span :class="item.status?'success':'error'">{{item.title}}</span>
+            <button v-on:click="changeSataus(item,false)" v-if="item.status">delete</button>
+            <button v-on:click="changeSataus(item,true)" v-if="!item.status">add</button>
+        </li>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            methods: {
+                changeSataus: function (item, status) {
+                    item.status = status;
+                }
+            },
+            data: {
+                items: [
+                    { title: '小二郎', status: true },
+                    { title: 'jspang.com', status: false }
+                ]
+            }
+        });
+
+    </script>
+</body>
+
+</html>

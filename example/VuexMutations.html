@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+    <script src="../node_modules/vuex/dist/vuex.js"></script>
+</head>
+<style>
+    .footerCart {
+        background: #999;
+        color: #fff;
+    }
+</style>
+
+<body>
+    <div id="hdcms">
+        <lists></lists>
+        <footer-cart></footer-cart>
+    </div>
+</body>
+<script type="text/x-template" id="Lists">
+    <div>
+        <h1 v-if="goods.length==0">购物车中没有商品, <a href="http://jd.com">去狗东购物吧</a></h1> 
+        <div v-if="goods.length>0">
+            <h1>购物车</h1>
+            <table border="1" widht="90%">
+                 <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>价格</th>
+                    <th>数量</th>
+                    <th>总计</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="v in goods">
+                    <td>{{v.id}}</td>
+                    <td>{{v.title}}</td>
+                    <td>
+                        <input type="text" v-model="v.num">
+                    </td>
+                    <td>{{v.totalPrice}}</td>
+                    <td>
+                        <button @click="del(v.id)">delete</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</script>
+<script type="text/x-template" id="footerCart">
+    <div class="footerCart">
+        <div v-if="totalPrice > 0">
+            总计：{{totalPrice}}
+        </div>
+    </div>
+</script>
+<script>
+    let Lists = {
+        template: '#Lists',
+        computed: {
+            goods() {
+                return this.$store.getters.goods;
+            }
+        },
+        methods: {
+            del(id) {
+                /* 触发mutations del传递id参数 */
+                this.$store.commit('del', { id });
+            }
+        }
+    }
+    let footerCart = {
+        template: '#footerCart',
+        computed: {
+            totalPrice() {
+                return this.$store.getters.totalPrice;
+            }
+        }
+    }
+    let store = new Vuex.Store({
+        // state局部
+        state: {
+            goods: [
+                { id: 1, title: 'iphone7Plus', price: 300, num: 3 },
+                { id: 2, title: 'hdcms系统', price: 1999, num: 6 },
+
+            ]
+        },
+        getters: {
+            totalPrice: state => {
+                let totalPrice = 0;
+                state.goods.forEach(element => {
+                    totalPrice += element.num * element.price
+                });
+                return totalPrice;
+            },
+            //获取商品总计算每件商品的总价
+            goods(state) {
+                let goods = state.goods;
+                goods.forEach(obj => {
+                    obj.totalPrice = obj.num * obj.price;
+                });
+                return goods;
+            }
+        },
+        mutations: {
+            //删除购物车商品
+            del(state, param) {
+                let k;
+                for (let i = 0; i < state.goods.length; i++) {
+                    if (state.goods[i].id == param.id) {
+                        k = i;
+                        break;
+                    }
+                }
+                /* 删除id对应数据 */
+                state.goods.splice(k, 1);
+            }
+        }
+    });
+    var app = new Vue({
+        el: '#hdcms',
+        store,
+        components: {
+            Lists, footerCart
+        }
+    })
+</script>
+
+</html>

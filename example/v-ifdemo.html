@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>HelloWorld</h1>
+    <hr>
+    <div id="app">
+        <h1>demo1</h1>
+        <input type="checkbox" v-model="copyright">接受协议
+        <br>
+        <span v-if="copyright==false">请先接受协议</span>
+        <button v-else>注册</button>
+        <hr>
+        <h1>demo2</h1>
+        <input type="text" v-model="age">
+        <span v-if="age<20">小孩</span>
+        <span v-else-if="age<30">青年</span>
+        <span v-else-if="age<50">壮年</span>
+        <span v-else>老年</span>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                copyright: false,
+                age:0
+            }
+        });
+
+    </script>
+</body>
+
+</html>

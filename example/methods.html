@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>methods Option</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>methods Option</h1>
+    <hr>
+    <div id="app">
+        {{a}}
+        <br>
+        <!-- 
+             一、methods中参数的传递
+                1、在methods的方法中进行声明，比如我们给add方法
+                    加上一个num参数，就要写出add:function(num){}. 
+                2、调用方法时直接传递，比如我们要传递2这个参数，我们
+                        在button上就直接可以写。
+                    <button @click=”add(2)”></button>.
+         -->
+        <!-- 
+            二、methods中的$event参数
+            $event=MouseEvent 一样 点击事件
+             methods中的$event参数 传递的$event参数都是关
+                于你点击鼠标的一些事件和属性
+         -->
+        <button @click="add(2,$event)">add</button>
+        <br>
+        <!-- 
+           三 native 给组件绑定构造器里的原生事件。
+             把某个按钮封装成组件，然后反复使用，如何让组件调
+                用构造器里的方法，而不是组件里的方法。就需要用到我们的.native修饰器了。
+        -->
+        <p><btn @click.native="add(2)"></btn></p>
+    </div>
+    <!-- 
+         四、作用域外部调用构造器里的方法 
+            这种不经常使用，如果你出现了这种情况，说明你的代码组织不够好。
+     -->
+    <button onclick="app.add(3)">外部add</button>
+    <script type="text/javascript">
+        var btn ={
+            template:'<button>組件ADD</button>'
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                a: 100
+            },
+            components:{
+                "btn":btn
+            },
+            methods: {
+                add: function (num, event) {
+                    console.log(event);
+                    if (num != "") {
+                        this.a += num;
+                    } else {
+                        this.a++;
+                    }
+                    console.log(event);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

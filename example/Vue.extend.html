@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.extend扩展实例构造器</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>Vue.extend扩展实例构造器</h1>
+    <hr>
+    <div id="app">
+        <author id="author"></author>  
+        <author></author>  
+    </div>
+    <script type="text/javascript">
+    // 扩展实例构造器
+    // 全局组件
+    //1.创建一个组件构造器
+    var authorExtend = Vue.extend({
+        template:'<p><a :href="authorUrl" >{{authorName}}</a></p>',
+        data:function(){
+            return {
+                authorName:'Jspang',
+                authorUrl:'http://www.baidu.com'
+            }
+        }
+    })
+    // 扩展实例构造器是需要挂载的，我们再进行一次挂载
+    //两种挂载方式
+    new authorExtend().$mount("#author");
+    new authorExtend().$mount("author");
+    </script>
+</body>
+</html>

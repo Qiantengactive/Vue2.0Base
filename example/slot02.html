@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>slot保留原来的位置</title>
+    <script src="../assets/js/vue.js"></script>
+    <style>
+    </style>
+
+</head>
+
+<body>
+    <div id="box">
+        <aaa1>
+            <ul>
+                <li>1111</li>
+                <li>2222</li>
+                <li>3333</li>
+            </ul>
+        </aaa1>
+        <hr>
+        <aaa1></aaa1>
+    </div>
+    <template id="aaa">
+        <div>
+            <h1>xxxx</h1>
+            <slot>这是默认的情况</slot>
+            <p>welcome vue</p>
+        </div>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                // a: 'aaa'
+            },
+            components: {
+                'aaa1': {
+                    template: '#aaa'
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>浅度监听2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+    </style>
+    <script src="../assets/js/vue.js"></script>
+    <script>
+        window.onload = function () {
+            var vm = new Vue({
+                el: '#box',
+                data: {
+                    json1: { name: 'strive', age: 16 },
+                    b: 2
+                }
+            });
+            //深度监听  json对象 考虑里面全部  会弹出来
+            // vm.$watch('json1', function () {
+            //     alert('发生变化了');
+            // },{deep:true});  
+            //  浅度监听 json.name对象 考虑里面全部 会弹出来
+            // vm.$watch('json1.name', function () {
+            //     console.log('');
+            //     alert('发生变化了');
+            // });
+            //  浅度监听 json对象 考虑里面 不会弹出来
+            vm.$watch('json1', function () {
+                console.log('');
+                alert('发生变化了');
+            });
+
+            document.onclick = function () {
+                vm.json1.name = 'aaa';
+            };
+        };
+
+    </script>
+</head>
+
+<body>
+    <div id="box">
+        <!-- {{json1 | json1}} -->
+        {{json1}}
+        <br> {{b}}
+    </div>
+
+</body>
+
+</html>

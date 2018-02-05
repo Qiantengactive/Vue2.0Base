@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>实例方法</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="../assets/js/vue.js"></script>
+    <style type="text/css">
+        .one,
+        .two {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            border: 1px solid #000;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: -moz-none;
+            cursor: pointer;
+        }
+
+        .two {
+            left: 200px;
+        }
+
+        .six {
+            width: 100px;
+            height: 100px;
+            background: blue;
+            border: 1px solid #000;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div v-drag class="six"></div>
+        <!-- <div class="one" v-drag>拖拽one</div> -->
+        <!-- <div class="two" v-drag>拖拽two</div> -->
+    </div>
+</body>
+<script>
+    Vue.directive('drag', {
+        bind: function (el) {
+            el.onmousedown = function (e) {
+                let l = e.clientX - el.offsetLeft;
+                let t = e.clientY - el.offsetTop;
+                document.onmousemove = function (e) {
+                    el.style.left = e.clientX - l + 'px';
+                    el.style.top = e.clientY - t + 'px';
+                };
+                el.onmouseup = function () {
+                    document.onmousemove = null;
+                    el.onmouseup = null;
+                }
+            }
+        }
+    })
+    new Vue({
+        el: '#app'
+    });  
+</script>
+
+</html>

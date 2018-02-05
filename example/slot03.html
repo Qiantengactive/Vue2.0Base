@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>slot中name属性的使用</title>
+    <script src="../assets/js/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <aaa>
+            <ul slot="ul-slot">　　　　<!-- 这里slot的名字要与下面slot中name属性相对应 -->
+                <li>1111</li>
+                <li>2222</li>
+                <li>3333</li>
+            </ul>
+            <ol slot="ol-slot">　　　　<!-- //用法同上 -->
+                <li>111</li>
+                <li>222</li>
+                <li>333</li>
+            </ol>
+        </aaa>
+        <hr>
+        <aaa>
+        </aaa>
+    </div>
+    <template id="aaa">
+        <div>
+            <h1>xxxx</h1>
+            <slot name="ol-slot">这是默认的情况1</slot>　　　　　　<!-- //设置name属性，给slot命名 -->
+            <p>welcome vue</p>
+            <slot name="ul-slot">这是默认的情况2</slot>
+        </div>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            components: {
+                'aaa': {
+                    template: '#aaa'
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

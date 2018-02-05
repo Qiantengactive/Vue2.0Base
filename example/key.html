@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>键盘键</h1>
+    <hr>
+    <div id="app">
+        <input type="text" @keyup.ctrl.a="keyEvent">
+        <hr>
+        <div :style="style" @click.left="handler"></div>
+        <!-- <div :style="style" @click.left="handler($event)"></div> -->
+        <!-- <div :style="style" @click.left="handler($event)" oncontextmenu="return false"></div> -->
+        <div :style="style" @contextmenu.prevent="handler2($event)"></div>
+        <div :style="style" @contextmenu.middle="handler3($event)"></div>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'HelloWorld!111',
+                style: { border: "solid 1px red", height: "300px" }
+            },
+            methods: {
+                keyEvent() {
+                    console.log('aaaa');
+                },
+                handler(){
+                    alert('左边');
+                },
+                handler2(){
+                    alert('左边');
+                },
+                handler3(){
+                    alert('左边');
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

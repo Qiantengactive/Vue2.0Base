@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <li v-for="(v,k) in comments">
+            {{v.id}} -- {{v.comment}}
+            <button @click="remove(k)">delete</button>
+            <button @dblclick="remove2(k)">delete</button>
+        </li>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                comments: [
+                    { id: 3, comment: 'awqdq' },
+                    { id: 2, comment: 'eqweqweff' },
+                    { id: 4, comment: 'hhhresdfzx' },
+                    { id: 1, comment: 'dsdsjf' }
+                ]
+            },
+            methods: {
+                remove(k) {
+                    console.log(k);
+                },
+                remove2(k) {
+                    console.log(k);
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

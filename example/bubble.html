@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+    <style>
+        .a{
+            height: 200px
+        }
+    </style>
+</head>
+
+<body>
+    prevent阻止a标签跳转事件
+    stop阻止冒泡事件
+    <hr>
+    <div id="app">
+        <div @click="box" class='a' :style="{border:'solid 2px red'}">
+            <!-- <a href="http://baidu.com" @click.prevent="links">bubble</a> -->
+            <!-- <a href="http://baidu.com" @click.stop="links">bubble</a> -->
+            <a href="http://baidu.com" @click.stop.prevent="links">bubble</a>
+            <!-- <a href="http://baidu.com" @click="links">bubble</a> -->
+        </div>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'HelloWorld!111'
+            },
+            methods:{
+                box(){
+                    alert('div标签 父级');
+                },
+                links(){
+                    alert('a标签')
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

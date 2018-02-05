@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的component组件2 props 挂载数据绑定 重点重点</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue的component组件2 props 挂载数据绑定 重点重点</h1>
+    <hr>
+    <div id="app">
+        <panda :here="message"></panda>
+        <!-- 小驼峰命名法 在构造器中写props: ['fromHere']  -->
+        <!-- <panda from-here="china2"></panda> -->
+
+    </div>
+    <jspang></jspang>
+    <script type="text/javascript">
+        //全局在构造器外面定义 局部在构造器里面定义
+        var app = new Vue({
+            el: '#app',
+            data:{
+                message:'sichuanchina'
+            },
+            components: {
+                "panda": {
+                    // template: `<div style="color:green">Pand from {{here}}--{{fromHere}}</div>`, 
+                    template: `<div style="color:green">Pand from {{here}}</div>`, 
+                    props: ['here','fromHere']
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

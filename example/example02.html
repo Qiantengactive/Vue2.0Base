@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>example02 methods Demo</title>
+    <script src="../assets/js/vue.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>example02 methods demo</h1>
+    <hr>
+    <div id="app"></div>
+    <button onclick="destroy()">卸载</button>
+    <button onclick="reload()">刷新</button>
+    <button onclick="tick()">更改数据</button>
+    <script type="text/javascript">
+        var jspang = Vue.extend({
+            template: `<p>{{message}}</p>`,
+            data: function () {  //与构造器不同
+                return {
+                    message: 'Hello ,I am jspang'
+                }
+            },
+            mounted: function () {
+                console.log('mounted 被创建！');
+            },
+            destroyed: function () {
+                console.log('destroy 销毁之后');
+            },
+            updated:function(){
+                console.log('updated 更新之后');
+            }
+        })
+        /* 一、$mount方法 
+            $mount方法是用来挂载我们的扩展的，
+            这里我们作了jspang的扩展，然后用$mount的方法把jspang挂载
+            到DOM上，我们也生成了一个Vue的实例，直接看代码。
+        */
+        var vm = new jspang().$mount('#app');
+        function destroy() {
+            /* 二、$destroy() 卸载方法 */
+            vm.$destroy();
+        }
+        function reload(){
+            /* 三、$forceUpdate() 更新方法 */
+            vm.$forceUpdate();
+        }
+        function tick(){
+            //更改message内容
+            vm.message='update message info';
+            // 调用nextTick(callback) 执行数据更新之后进行回调
+            // Vue构造器里的data值被修改完成后会调用这个方法
+            /* 四、$nextTick() 数据修改方法 监测到数据更改了 回调函数 */
+            vm.$nextTick(function(){
+                console.log('message 更新完成后我被调用了');
+            })
+        }
+    </script>
+</body>
+
+</html>

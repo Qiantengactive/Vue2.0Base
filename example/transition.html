@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的中控制class动画--后盾网(47)</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h3>Vue中transition控制css过度动画--后盾网(47)</h3>
+    <p>
+        v-enter: 准备要显示的类;   <br>
+        v-enter-active: 显示过程中的类; <br>
+        v-enter-to: 显示结束后的类; <br>
+        v-leave: 准备隐藏时候的类;<br>
+        v-leave-active: 隐藏过程中的类; <br>
+        v-leave-to: 隐藏结束后的类;<br>
+    </p>
+    <hr>
+    <div id="app">
+        <transition name="hd">
+            <h1 v-if="type">baidu.com后盾网</h1>
+        </transition>
+        <button @click="type=!type">切换</button>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            type: false
+        }
+    })
+</script>
+<style>
+    .hd-enter,.hd-leave-to{
+        opacity: 0;
+    }
+    .hd-leave-to{
+
+    }
+    .hd-enter-active{
+        transition: all 5s;
+        color: red;
+    }
+    .hd-leave-active{
+        transition: all .5s;
+        color:green
+    }
+</style>
+</html>

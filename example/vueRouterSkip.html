@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+    <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="hdcms">
+        <router-view></router-view>
+    </div>
+</body>
+<script type="text/x-template" id="home">
+    <div>
+        <li v-for="v in news">
+            <a href="" @click.prevent="go(v.id)">{{v.title}}</a>
+        </li>
+    </div>
+</script>
+<script type="text/x-template" id="content">
+    <div>
+        <h1>{{field.title}}--{{field.id}}</h1>
+        <p>
+            {{field.content}}
+        </p>
+        <a href="" @click.prevent="back()">返回</a>
+    </div>
+</script>
+<script>
+    var data = [
+        { id: 1, title: 'HDPHP开源免费框架', content: '这是内容....1' },
+        { id: 2, title: 'HDCMS内容管理系统', content: '这是HDCMS内容....2' }
+    ]
+    const home = {
+        template: '#home',
+        data() {
+            return {
+                news: data
+            }
+        },
+        methods: {
+            go(id) {
+                //写业务逻辑
+                /* 路由的三种写法 */
+                //var url='/content/'+id;
+                //{name:'content',params:{id:id}}
+                //{name:'content',params:{id:2}}
+                var url = { path: '/content/' + id }
+                /*
+                    使用push会放到浏览器记录里面
+                    直接替换当前页面不生成历史记录
+                 */
+                this.$router.push(url);      //建议使用
+                // this.$router.replace(url);      //直接替换 不建议使用
+                // this.$router.go(-1);         //后退
+            }
+        }
+    }
+    const content = {
+        template: '#content',
+        data() {
+            return {
+                field: {}
+            }
+        },
+        watch: {
+            '$route'(to, from) {
+                this.load();
+            }
+        },
+        mounted() {
+            this.load();
+        },
+        methods: {
+            load() {
+                var id = this.$route.params.id;
+                for (let k = 0; k < data.length; k++) {
+                    if (data[k].id == id) {
+                        this.field = data[k];
+                    }
+                }
+            },
+            back() {
+                this.$router.go(-1);
+            }
+        }
+    }
+    let routes = [
+        { path: '/', component: home },
+        { path: '/content/:id', component: content, name: 'content' }
+    ];
+    //要做组件交给路由器
+    let router = new VueRouter({ routes: routes });
+
+    new Vue({
+        el: '#hdcms',
+        router: router
+    });
+</script>
+
+</html>

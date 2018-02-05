@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>computedDemo</h1>z
+    <hr>
+    <div id="app">
+        <ul>
+            <li v-for="item in items">
+                {{item.name}}-{{item.sex}}
+            </li>
+        </ul>
+        {{type}}
+        <input type="radio" v-model="type" value="female">女孩
+        <input type="radio" v-model="type" value="male">男孩
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                type: 'all',
+                user: [
+                    { name: '小明', sex: 'male' },
+                    { name: '小强', sex: 'male' },
+                    { name: '小丽', sex: 'female' },
+                    { name: '小梅', sex: 'female' },
+                ]
+            },
+            computed: {
+                items() {
+                    if (this.type == 'all') {
+                        return this.user;
+                    } else {
+                        return this.user.filter(obj =>
+                            obj.sex == this.type
+                        )
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

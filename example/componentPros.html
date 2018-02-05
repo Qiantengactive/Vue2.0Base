@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <p>hd="aa"直接传递字符串 :list="aaa"传递对象</p>
+    <hr>
+    <div id="app">
+        <hd-news hd="abc" cms="技术胖视频" :show-del-button="true" :list="news"></hd-news>
+    </div>
+</body>
+<script type="text/x-template" id="hdNews">
+    <div>
+        {{hd}}--{{cms}}--{{showDelButton}}
+        <li v-for="(item,index) in list">
+            {{item.title}}
+            <button @click="del(index)" v-if="showDelButton">del</button>
+        </li>
+    </div>
+</script>
+<script>
+    var hdNews={
+        template:'#hdNews',
+        props:['hd','cms','showDelButton','list'],
+        data(){
+            return {};
+        }
+    };
+    new Vue({
+        el:'#app',
+        components:{hdNews: hdNews},
+        data:{
+            news:[
+                {title:'hdcms'},
+                {title:'hdphp'},
+                {title:'baidu.com'}
+            ]
+        }
+    })
+</script>
+
+</html>

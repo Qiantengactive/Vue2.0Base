@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <hd-new :show-del-button="23"></hd-new> -->
+        <hd-new :show-del-button="0"></hd-new>
+    </div>
+    <script type="text/x-template" id="hdNews">
+        <div>
+            <li v-for="(v,k) in list">
+              {{v.title}}
+                <button @click="del(k)" v-if="showDelButton">del</button>
+            </li>
+        </div>        
+    </script> String Number Boolean Function Object Array
+</body>
+<script>
+    var hdNew = {
+        template: '#hdNews',
+        props: {
+            showDelButton: {
+                type: [Boolean, Number],
+                // default:false
+                required: true  //必须有值才能传递过去
+            },
+            // showDelButton: {
+            //     validator(v) {
+            //         return v === 1 || v === 0;
+            //     }
+            // },
+            list: {
+                type: Array,
+                default() {
+                    return [{ title: "jsp" }]
+                }
+            }
+        },
+        data() {
+            return {};
+        }
+    };
+    new Vue({
+        el: '#app',
+        components: { hdNew },
+        data: {
+            news: [
+                { title: 'aaa' },
+                { title: 'bbbb' },
+                { title: 'cccc' }
+            ]
+        }
+    })
+</script>
+
+</html>

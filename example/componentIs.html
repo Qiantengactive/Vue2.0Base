@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的组件之间的子组件使用tempalet&scope向父组件传递信息--后盾网(45)</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <p>Vue的组件之间使用:is动态组件灵活设置页面布局子--后盾网(46)</p>
+    <hr>
+    <div id="app">
+        <div :is="formType"></div>
+        <input type="radio" v-model="formType" value="hdList">文本框
+        <input type="radio" v-model="formType" value="hdTextarea">文本框
+    </div>
+</body>
+<script>
+    var hdList = {
+        template:`<div><input></div>`
+    };
+    var hdTextarea={
+        template:'<div><textarea></textarea></div>'
+    }
+    new Vue({
+        el: '#app',
+        components: { hdList, hdTextarea },
+        data: {
+            formType:'hdList'
+        }
+    })
+
+
+</script>
+
+</html>

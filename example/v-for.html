@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-for遍历数组</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>v-for遍历数组</h1>
+    <hr>
+    <div id="app">
+        <ul>
+            <li v-for="item in sortItems">
+                {{item}}
+            </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(student,index) in sortStudent">
+                {{index+1}}-{{student.name}}--{{student.age}}
+            </li>
+        </ul>
+        <h1>demo1</h1>
+        <table border="1">
+            <tr>
+                <th>序号</th>
+                <th>编号</th>
+                <th>标题</th>
+                <th>老师</th>
+            </tr>
+            <tbody>
+                <tr v-for="(field,key) in news">
+                    <td>{{key}}</td>
+                    <td>{{field.id}}</td>
+                    <td>{{field.title}}</td>
+                    <td>{{name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                items:[20, 23,25,24, 32, 34, 56,15,12,11, 76, 1, 22, 12],
+                students:[
+                    {name:'jsp4',age:45},
+                    {name:'jsp2',age:23},
+                    {name:'jsp3',age:34},
+                    {name:'jsp1',age:11}
+                ],
+                name:'后盾人视频',
+                news:[
+                    {id:1,title:'baidu.com'},
+                    {id:2,title:'jd.com'}
+                ]
+            },
+            computed: {
+                sortItems: function () {
+                    // return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+                    return this.items.sort(sortNumber);
+                },
+                 sortStudent: function () {
+                    // return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+                    return sortByKey(this.students, 'age');
+                }
+            }
+        });
+        function sortNumber(a,b){
+            return a-b;
+        }
+        //数组对象方法排序:
+        function sortByKey(array, key) {
+            return array.sort(function (a, b) {
+                    var x = a[key];
+                    var y = b[key];
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+              });
+        }
+    </script>
+</body>
+
+</html>

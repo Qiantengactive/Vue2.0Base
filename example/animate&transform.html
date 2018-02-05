@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="hdcms">
+        <button @click="type=!type">切换</button>
+        <transition name="hd">
+            <h1 v-if="type">wwww.baidu.com</h1>
+        </transition>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:'#hdcms',
+        data:{
+            type:false
+        }
+    });
+</script>
+<style>
+    .hd-enter-active{
+        animation: show-in 1s;
+        transition: all 1s;
+    }
+    .hd-leave-active{
+        animation: hide-out 1s;
+        transform: all 1s;
+    }
+    .hd-enter,.hd-leave-to{
+        opacity: 0;
+    }
+    @keyframes show-in{
+        0%{
+            transition:translate(200px,0);
+        }
+        100%{
+            transform: translate(0,0);
+        }
+    }
+    @keyframes hide-out{
+        0%{
+            transition:translate(0,0);
+        }
+        100%{
+            transform: translate(200px,0);
+        }
+    }
+</style>
+</html>

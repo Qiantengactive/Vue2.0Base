@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的中控制class动画--后盾网(47)</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h3>Vue的中控制class动画--后盾网(47)</h3>
+    <p>
+        v-enter:        准备要显示的类;
+        v-enter-active: 显示过程中的类;
+        v-enter-to:     显示结束后的类;
+        v-leave:        准备隐藏时候的类;
+        v-leave-active: 隐藏过程中的类;
+        v-leave-to:     隐藏结束后的类;
+    </p>
+    <hr>
+    <div id="app">
+        <div :is="formType"></div>
+        <input type="radio" v-model="formType" value="hdList">文本框
+        <input type="radio" v-model="formType" value="hdTextarea">文本框
+    </div>
+</body>
+<script>
+    var hdList = {
+        template: `<div><input></div>`
+    };
+    var hdTextarea = {
+        template: '<div><textarea></textarea></div>'
+    }
+    new Vue({
+        el: '#app',
+        components: { hdList, hdTextarea },
+        data: {
+            formType: 'hdList'
+        }
+    })
+
+
+</script>
+
+</html>

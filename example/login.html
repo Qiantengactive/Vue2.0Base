@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <template v-if="regType=='email'">
+            email:
+            <input type="text" name="username" key="mail-register">
+        </template>
+        <template v-else>
+            tel:
+            <input type="text" name="username" key="tel-register">
+        </template>
+        <br>
+        <input type="radio" value="email" v-model="regType">邮箱注册
+        <input type="radio" value="phone" v-model="regType">手机注册
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                regType: 'email'
+            }
+        });
+
+    </script>
+</body>
+
+</html>

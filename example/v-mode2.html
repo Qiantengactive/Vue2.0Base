@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+    <script src="../assets/js/lodash.js"></script>
+    <!-- <script src="../node_modules/lodash/lodash.js"></script> -->
+</head>
+
+<body>
+    <h1>v-model 中使用lodash</h1>
+    <hr>
+    <div id="app">
+        <input type="text" value="" v-model="word">
+        <p>
+            <!-- 结果：{{result}} -->
+        </p>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            watch: {
+                word:_.debounce(
+                     function (newV, oldV) {
+                        console.log(newV);
+                        console.log(oldV);
+                    },500
+                )
+            },
+            data: {
+                word: 'ddd',
+            }
+        });
+    </script>
+</body>
+
+</html>

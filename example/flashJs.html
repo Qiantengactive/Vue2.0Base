@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/velocity.min.js"></script>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="hdcms">
+        <button @click="type=!type">切换</button>
+        <!-- 屏蔽掉css -->
+        <transition @before-enter="beforeEnter" @enter="enter" @leave="leave" :css="false">
+            <h1 v-if="type">www.baidu.com</h1>
+            </transitio>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#hdcms',
+        data: {
+            type: false
+        },
+        methods: {
+            beforeEnter(el) {
+                el.style.opacity = 0;
+            },
+            enter(el, done) {
+                Velocity(el, { opacity: 1 }, { duration: 2000, complete: done })
+            },
+            leave(el,done){
+                Velocity(el, { opacity: 0,rotateZ:'-690deg' }, { duration: 2000, complete: done })
+            },
+            done(){
+                console.log("aaa");
+            }
+        }
+    })
+
+</script>
+
+</html>

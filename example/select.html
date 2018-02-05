@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <label for="">动态绑定select</label>
+        <select name="" id="" v-model="field.cid" multiple>
+            <option value="">===请选择===</option>
+            <option :value="v.cid" v-for="v in category">{{v.title}}</option>
+        </select>
+        {{field.cid}}
+        <hr>
+        <label for="">动态绑定radio</label>
+        <div v-for="v in type">
+            <input type="radio" v-model="field.type" :value="v.name">{{v.title}}
+        </div>
+        <div>{{field.type}}</div>
+        <hr>
+        <label for="">动态绑定checkbox</label>
+        <div v-for="v in flag">
+            <input type="checkbox" v-model="field.flag" :value="v.name">{{v.titl}}
+        </div>
+        <div>
+            {{field.flag}}
+        </div>
+    </div>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            type: [
+                { name: 'draft', title: '草稿' },
+                { name: 'send', title: '正式发布' },
+                { name: 'times', title: '延迟发布' }
+            ],
+            flag: [
+                { name: 'hot', titl: '热门' },
+                { name: 'recommend', titl: '推荐' }
+            ],
+            category: [
+                { cid: 1, title: 'aaa1' },
+                { cid: 2, title: 'aaa2' },
+                { cid: 3, title: 'aaa3' },
+                { cid: 4, title: 'aaa4' }
+            ],
+            field: {
+                titile: 'jishupang',
+                click: 399,
+                url: 'baidu.com',
+                desc: 'vueDemo Select',
+                type: 'send',
+                flag: [],
+                cid: []
+            }
+        }
+    })
+</script>
+
+</html>

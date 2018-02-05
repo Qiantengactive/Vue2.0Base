@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>push方法加入</h1>
+    <hr>
+    <div id="app">
+        <li v-for="item in comments">
+            {{item.comment}}
+        </li>
+        <textarea name="" id="" cols="30" rows="10" v-model="current_Content"></textarea>
+        <button @click="push">add</button>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                current_Content:'',
+                comments:[
+                    {comment:'技术胖'},
+                    {comment:'vue'}
+                ]
+            },
+            methods:{
+                push(){
+                    var content ={ comment:this.current_Content}
+                    this.comments.push(content);
+                    this.current_content = '';
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

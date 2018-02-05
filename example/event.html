@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>HelloWorld</h1>
+    <hr>
+    <div id="app">
+        <form action="" @submit="post($event)">  <!-- 同步 -->
+        <!-- <form action="" @submit.prevent="post()"> -->    <!-- 异步 -->
+            <h1>{{time}}</h1>
+            <button>提交</button>
+
+        </form>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                time:new Date()
+            },
+            methods:{
+                post(event){
+                    // event.preventDefault();
+                    alert('aa');
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

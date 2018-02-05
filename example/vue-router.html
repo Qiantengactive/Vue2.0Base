@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+    <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+    <h1>vue-router</h1>
+    <hr>
+    <div id="app">
+        <router-link to="/php">php</router-link>
+        <router-link to="/cms">cms</router-link>
+        <router-view></router-view>
+    </div>
+    <script type="text/javascript">
+
+        const abphp = {
+            template: `<h1>php</h1>`
+        }
+
+        const abcms = {
+            template: `<h1>cms</h1>`
+        }
+
+        let abc = [
+            { path: '/php', component: abphp },
+            { path: '/cms', component: abcms }
+        ];
+
+        let routerw = new VueRouter({ routes: abc })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'HelloWorld!111'
+            },
+            router: routerw
+        });
+    </script>
+</body>
+
+</html>

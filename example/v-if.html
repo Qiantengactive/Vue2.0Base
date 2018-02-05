@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>v-if&v-else&v-show</h1>
+    <hr>
+    <div id="app">
+        <!-- v-if 与v-else一组 -->
+        <div v-if="isLogin">nihao.vue</div>
+        <div v-else>请登录</div>
+        <hr>
+        <div v-show="isLogin">v-show</div>
+        <input type="checkbox" v-model="isLogin">
+        <hr>
+        <h1 v-if="status">v-if</h1>  
+        <input type="checkbox" v-model="status">
+    </div>
+    <script type="text/javascript">
+        var app =new Vue({
+            el:'#app',
+            data:{
+                isLogin: false,
+                status:true
+            }
+        });
+    </script>
+</body>
+</html>

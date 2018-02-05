@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>computed Option 计算属性</h1>
+    <hr>
+    <div id="app">
+        <input type="text" v-model="n1">+
+        <input type="text" v-model="n2">=
+        <input type="text" v-model="sum">
+        <hr>
+        {{price}}--{{newPrice}}
+        <ul>
+            <li v-for="item in reverNews ">{{item.title}}--{{item.data}}</li>
+        </ul>
+    </div>
+    <div id="app2">
+        <ul>
+            <li v-for="item in newList ">{{item.title}}--{{item.data}}</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        /* 
+            computed 的作用主要是对原数据进行改造输出。
+            改造输出：包括格式的编辑，大小写转换，顺序重排，添加符号……。
+            一、格式化输出结果：
+                    我们读书的原始数据是price:100    但是我们输出给用户的样子是（￥100元）。
+            二、用计算属性反转数组
+        
+         */
+        var newsList = [
+            { title: '中纪委对“只说不做”严肃问责 新时代新气象1', data: '2017/3/24' },
+            { title: '中纪委对“只说不做”严肃问责 新时代新气象2', data: '2017/3/25' },
+            { title: '中纪委对“只说不做”严肃问责 新时代新气象3', data: '2017/3/26' },
+            { title: '中纪委对“只说不做”严肃问责 新时代新气象4', data: '2017/3/27' }
+        ]
+        var app = new Vue({
+            el: '#app',
+            data: {
+                price: 100,
+                newList: newsList,
+                n1:1,
+                n2:2
+            },
+            computed: {
+                sum(){
+                    // return parseInt(this.n1)+parseInt(this.n2)
+                    return this.n1*1+this.n2*1
+                },
+                newPrice: function () {
+                    return this.price = "￥" + this.price + '元'
+                },
+                reverNews: function () {
+                    console.log(newsList);
+                    return this.newList.reverse();
+                }
+            }
+        });
+        var app = new Vue({
+            el: '#app2',
+            data: {
+                newList: newsList
+            },
+            methods:{
+            }
+        })
+        console.log(newsList);
+    </script>
+</body>
+
+</html>

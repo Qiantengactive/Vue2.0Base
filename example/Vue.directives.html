@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.directives指令</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue.directives自定义指令</h1>
+    <hr>
+    <div id="app">
+        <div v-jspang="color">{{num}}</div>
+        <p>
+            <button @click="add">ADD</button>
+        </p>
+        <p>
+            <button onclick="unbind1()">解绑</button>
+        </p>
+    </div>
+    <script type="text/javascript">
+        function unbind1() {
+            app.$destroy()
+        }
+        /* 
+        自定义指令就是默认的绑定bind  和更新
+        el: 指令所绑定的元素，可以用来直接操作DOM。
+    
+        binding:  一个对象，包含指令的很多信息。
+    
+        vnode: Vue编译生成的虚拟节点。 可省
+        
+         */
+        Vue.directive("jspang", function (el, binding, vnode) {
+            console.log(el);
+            console.log(binding);
+            console.log(binding.name);
+            console.log(binding.expression);
+            var a = binding.expression + ": " + binding.value;
+            console.log(a);
+            el.style = a;
+            console.log(vnode);
+        });
+        /* 
+             1.bind:只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个绑定
+                 时执行一次的初始化动作。
+             2.inserted:被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于document中）。
+             3.update:被绑定于元素所在的模板更新时调用，而无论绑定值是否变化。通过比较
+                 更新前后的绑定值，可以忽略不必要的模板更新。
+             4.componentUpdated:被绑定元素所在模板完成一次更新周期时调用。
+             5.unbind:只调用一次，指令与元素解绑时调用。
+        
+         */
+
+        Vue.directive("jspang", {
+            bind: function (el, binding) { //被绑定时调用
+                console.log('1-bind 被绑定时调用');
+                el.style = 'color:' + binding.value;
+            },
+            inserted: function () {//绑定到节点
+                console.log('2-inserted 绑定到节点');
+            },
+            update: function () {//组件更新
+                console.log('3-update 组件更新');
+            },
+            componentUpdated: function () {  //组件更新完成
+                console.log('4 - componentUpdated 组件更新完成');
+            },
+            unbind: function () {//解绑
+                console.log('5 - bind 解绑');
+            }
+        });
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'HelloWorld!111',
+                num: 1,
+                color: 'red'
+            },
+            methods: {
+                add: function () {
+                    this.num++;
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

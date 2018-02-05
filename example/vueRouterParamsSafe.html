@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../assets/js/vue.js"></script>
+    <script src="../node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="hdcms">
+        <router-link to="/content/22">内容</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+<script type="text/x-template" id="content">
+    <div>
+        id:{{$route.params.id}}
+        <br>
+        <button @click="show">检测参数</button>
+    </div>
+</script>
+<script>
+    const content={
+        template:'#content',
+        methods:{
+            show(){
+                console.log(this.$route.params);
+            }
+        }
+    }
+    let routes=[
+        {path:'/content/:id(\\d{2})',component:content}
+        // {path:'/content',component:content}
+    ];
+    //要做组件交给路由器
+    let router= new VueRouter({routes:routes});
+
+    new Vue({
+        el:'#hdcms',
+        router: router 
+    });
+</script>
+</html>
